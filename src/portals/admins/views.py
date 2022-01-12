@@ -9,10 +9,10 @@ from django.views.generic import (
 
 from src.accounts.models import User
 from .models import (
-    ProjectType
+    Category,
 )
 
-""" GENERIC VIEWS CUSTOM > DASHBOARD AND NGO """
+""" TEMPLATE VIEW > DASHBOARD """
 
 
 @method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
@@ -32,21 +32,29 @@ class DashboardView(TemplateView):
 """ GENERIC VIEWS CRUD > PROJECT TYPE """
 
 
-# @method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
-# class ProjectTypeListView(ListView):
-#     queryset = ProjectType.objects.all()
-#
-#
-# @method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
-# class ProjectTypeCreateView(CreateView):
-#     model = ProjectType
-#     fields = '__all__'
-#     success_url = reverse_lazy('admins:projecttype-list')
-#
-#
-# @method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
-# class ProjectTypeUpdateView(UpdateView):
-#     model = ProjectType
-#     fields = '__all__'
-#     success_url = reverse_lazy('admins:projecttype-list')
+@method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
+class CategoryListView(ListView):
+    queryset = Category.objects.all()
+
+
+@method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
+class CategoryCreateView(CreateView):
+    model = Category
+    fields = '__all__'
+    success_url = reverse_lazy('admins:category-list')
+
+
+@method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
+class CategoryUpdateView(UpdateView):
+    model = Category
+    fields = '__all__'
+    success_url = reverse_lazy('admins:category-list')
+
+
+@method_decorator(user_passes_test(lambda u: u.is_superuser), name='dispatch')
+class CategoryDeleteView(UpdateView):
+    model = Category
+    fields = '__all__'
+    success_url = reverse_lazy('admins:category-list')
+
 

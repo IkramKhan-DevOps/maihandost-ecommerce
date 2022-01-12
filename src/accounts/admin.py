@@ -29,7 +29,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 
 from .models import (
-    User
+    User, Customer
 )
 
 csrf_protect_m = method_decorator(csrf_protect)
@@ -211,9 +211,15 @@ class UserCustomAdmin(admin.ModelAdmin):
         return super().response_add(request, obj, post_url_continue)
 
 
-# CUSTOM USER
-admin.site.register(User, UserCustomAdmin)
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = [
+        'user', 'orders_total', 'orders_completed', 'orders_pending', 'orders_cancelled'
+    ]
 
-admin.site.site_header = "PROJECT | Root admin access"
-admin.site.site_title = "root access"
-admin.site.index_title = "PRO"
+
+admin.site.register(User, UserCustomAdmin)
+admin.site.register(Customer, CustomerAdmin)
+
+admin.site.site_header = "ROOT | Admin access"
+admin.site.site_title = "ROOT"
+admin.site.index_title = "Dashboard"

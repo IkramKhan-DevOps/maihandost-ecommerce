@@ -1,9 +1,3 @@
-from django.db.models import Sum
-from django.views.generic import TemplateView, DetailView
+from django.shortcuts import render
 
-from src.accounts.models import User
-
-
-class HomeView(TemplateView):
-    template_name = 'website/home.html'
-
+# Create your views here.

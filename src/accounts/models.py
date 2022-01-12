@@ -30,3 +30,17 @@ class User(AbstractUser):
     def delete(self, *args, **kwargs):
         self.profile_image.delete(save=True)
         super(User, self).delete(*args, **kwargs)
+
+
+class Customer(models.Model):
+    user = models.OneToOneField('accounts.User', on_delete=models.CASCADE)
+    orders_total = models.PositiveIntegerField(default=0)
+    orders_completed = models.PositiveIntegerField(default=0)
+    orders_pending = models.PositiveIntegerField(default=0)
+    orders_cancelled = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        verbose_name_plural = "Customers"
+
+    def __str__(self):
+        return self.user.username
